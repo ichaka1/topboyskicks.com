@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#070708] text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOP BOYS KICKS | Curated Heat & Exclusive Drops</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace'],
+          },
+          colors: {
+            brand: {
+              black: '#070708',
+              card: '#0e0f12',
+              neon: '#ccff00',
+              silver: '#e2e8f0',
+              cyan: '#00f0ff',
+              gold: '#ffd700',
+              accent: '#ff0055'
+            }
+          },
+          animation: {
+            'glow-pulse': 'glow 2.5s infinite alternate',
+            'float-slow': 'float 4s ease-in-out infinite',
+            'spin-slow': 'spin 12s linear infinite',
+            'glitch': 'glitch 1s infinite linear alternate-reverse',
+            'shimmer': 'shimmer 2s linear infinite',
+          },
+          keyframes: {
+            glow: {
+              '0%': { filter: 'drop-shadow(0 0 10px rgba(204,255,0,0.3))' },
+              '100%': { filter: 'drop-shadow(0 0 28px rgba(204,255,0,0.85))' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(-2deg)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070708;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1a1c23;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ccff00;
+    }
+
+    /* Glassmorphism elements */
+    .glass-panel {
+      background: rgba(14, 15, 18, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-button {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-button:hover {
+      background: rgba(204, 255, 0, 0.15);
+      border-color: #ccff00;
+      color: #ccff00;
+      box-shadow: 0 0 15px rgba(204, 255, 0, 0.25);
+    }
+
+    /* Metallic Text Shimmer Effect */
+    .text-metallic {
+      background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 40%, #ffffff 60%, #52525b 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* Sneaker Trace Line Animation */
+    .sneaker-path {
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      transition: stroke-dashoffset 0.1s linear;
+    }
+
+    /* Grid pattern background */
+    .bg-grid {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+
+    /* Scanline Overlay for Cyberpunk Vibe */
+    .scanlines {
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.3)
+      );
+      background-size: 100% 4px;
+    }
+  </style>
+</head>
+
+<body class="h-full overflow-x-hidden font-sans select-none antialiased bg-[#070708]">
+
+  <!-- Ambient Sound Toggle & Status Top Bar -->
+  <div class="fixed top-5 left-5 right-5 z-50 flex justify-between items-center pointer-events-auto">
+    <div class="flex items-center space-x-3">
+      <div class="w-3 h-3 rounded-full bg-brand-neon animate-pulse"></div>
+      <span class="font-mono text-xs tracking-widest text-zinc-400 uppercase">SERVER: TOKYO-DROP-01 // LIVE</span>
+    </div>
+    
+    <div class="flex items-center space-x-3">
+      <!-- Audio Toggle Button -->
+      <button id="audioToggle" onclick="toggleAudio()" class="glass-button px-4 py-2 rounded-full text-xs font-mono flex items-center space-x-2 text-zinc-300 hover:text-white transition">
+        <i id="audioIcon" class="fa-solid fa-volume-xmark text-zinc-400"></i>
+        <span id="audioText" class="uppercase tracking-wider">SOUND: OFF</span>
+      </button>
+
+      <!-- Speed Control Trigger Toggle -->
+      <button onclick="toggleControlPanel()" class="glass-button px-4 py-2 rounded-full text-xs font-mono flex items-center space-x-2 text-zinc-300">
+        <i class="fa-solid fa-sliders text-brand-neon"></i>
+        <span class="hidden sm:inline uppercase tracking-wider">DEMO CONTROLS</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN PRELOADER SCREEN OVERLAY -->
+  <div id="preloader" class="fixed inset-0 z-40 flex flex-col justify-between p-6 md:p-12 transition-all duration-1000 ease-in-out bg-[#070708] overflow-hidden">
+    
+    <!-- Background Canvas Particles -->
+    <canvas id="particleCanvas" class="absolute inset-0 z-0 pointer-events-none opacity-40"></canvas>
+    
+    <!-- Subtle Grid Overlay -->
+    <div class="absolute inset-0 bg-grid pointer-events-none opacity-30"></div>
+    <div class="absolute inset-0 scanlines pointer-events-none opacity-20"></div>
+
+    <!-- Top Branding Section -->
+    <div class="relative z-10 flex flex-col items-center mt-12 md:mt-6">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/80 mb-3 text-[11px] font-mono tracking-widest text-zinc-400 uppercase">
+        <i class="fa-solid fa-certificate text-brand-neon"></i>
+        <span>VERIFIED AUTHENTIC HEAT</span>
+      </div>
+      <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-metallic text-center uppercase">
+        TOP BOYS KICKS
+      </h1>
+      <p class="font-mono text-xs sm:text-sm text-zinc-400 tracking-widest mt-2 uppercase text-center">
+        Curated Heat <span class="text-brand-neon">•</span> Exclusive Drops <span class="text-brand-neon">•</span> Culture
+      </p>
+    </div>
+
+    <!-- Center Hero Loader Graphic -->
+    <div class="relative z-10 flex-1 flex flex-col items-center justify-center my-6">
+      <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+        
+        <!-- Circular Progress Ring (SVG) -->
+        <svg class="absolute inset-0 w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
+          <!-- Background Track -->
+          <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="2.5" class="text-zinc-800/80" fill="transparent" />
+          <!-- Neon Progress Arc -->
+          <circle id="progressCircle" cx="50" cy="50" r="44" stroke="url(#neonGradient)" stroke-width="3.5" 
+                  stroke-linecap="round" class="transition-all duration-150 ease-out" 
+                  fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="276.46" />
+          
+          <defs>
+            <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ccff00" />
+              <stop offset="50%" stop-color="#00f0ff" />
+              <stop offset="100%" stop-color="#ff0055" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <!-- Outer Rotating Rings -->
+        <div class="absolute inset-2 rounded-full border border-dashed border-zinc-800/60 animate-spin-slow pointer-events-none"></div>
+        <div class="absolute inset-6 rounded-full border border-zinc-800/40 pointer-events-none"></div>
+
+        <!-- Animated Sneaker Graphic (Vector Drawing & Float) -->
+        <div class="relative z-10 w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center animate-float-slow animate-glow-pulse">
+          <svg id="sneakerSvg" class="w-full h-full filter drop-shadow-[0_10px_20px_rgba(204,255,0,0.25)]" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sneaker Outline Path for Stroke Animation -->
+            <path class="sneaker-path" d="M 50 220 
+                     C 50 220, 40 210, 40 190 
+                     C 40 170, 70 160, 110 160 
+                     C 130 140, 160 110, 200 90 
+                     C 240 70, 290 60, 330 80 
+                     C 360 95, 380 120, 410 145 
+                     C 430 160, 460 170, 460 190 
+                     C 460 210, 440 220, 420 225 
+                     C 380 230, 100 230, 50 220 Z" 
+                  stroke="#ccff00" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none" />
+            
+            <!-- Midsole & Sole details -->
+            <path class="sneaker-path" d="M 40 210 L 460 210 M 50 225 L 440 225 M 120 160 L 220 180 M 230 110 L 260 170 M 280 100 L 310 160 M 330 120 L 380 150" 
+                  stroke="#00f0ff" stroke-width="3" stroke-linecap="round" fill="none" />
+            
+            <!-- Swoosh / Signature Stripe Accent -->
+            <path class="sneaker-path" d="M 140 170 Q 240 200 390 120 Q 280 210 170 185 Z" 
+                  fill="rgba(204,255,0,0.15)" stroke="#ccff00" stroke-width="4" stroke-linejoin="round" />
+
+            <!-- Heel & Collar Details -->
+            <path class="sneaker-path" d="M 330 80 C 350 50, 390 60, 410 90 L 420 140" stroke="#ff0055" stroke-width="4" stroke-linecap="round" />
+            
+            <!-- Air Bubble Window detail -->
+            <rect x="350" y="212" width="50" height="10" rx="5" stroke="#00f0ff" stroke-width="2" fill="rgba(0,240,255,0.2)" />
+          </svg>
+        </div>
+
+        <!-- Center Counter Percentage Text -->
+        <div class="absolute bottom-6 flex flex-col items-center">
+          <span id="loaderPercent" class="font-mono text-3xl sm:text-4xl font-bold tracking-tight text-white">0%</span>
+        </div>
+      </div>
+
+      <!-- Hype Dynamic Status Quote Message -->
+      <div class="mt-8 text-center h-8 flex items-center justify-center">
+        <p id="statusQuote" class="font-mono text-xs sm:text-sm text-brand-neon tracking-widest uppercase transition-opacity duration-300">
+          INITIALIZING DROP SYSTEM...
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Actions / Enter Button Container -->
+    <div class="relative z-10 flex flex-col items-center justify-center mb-4">
+      <!-- Enter Site Trigger Button (Active on 100%) -->
+      <button id="enterBtn" onclick="revealSite()" disabled 
+              class="opacity-0 pointer-events-none transform translate-y-4 transition-all duration-500 ease-out px-10 py-4 rounded-full font-mono text-sm font-bold tracking-wider uppercase bg-brand-neon text-black hover:bg-white hover:shadow-[0_0_30px_rgba(204,255,0,0.8)] flex items-center space-x-3 cursor-pointer">
+        <span>ENTER THE VAULT</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <!-- Bottom Tagline / Copyright -->
+      <div id="bottomTagline" class="transition-opacity duration-300 mt-2 text-center">
+        <p class="font-mono text-[10px] sm:text-xs text-zinc-500 tracking-widest uppercase">
+          TOP BOYS KICKS LIMITED EDITION • ALL RIGHTS RESERVED 2026
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE DEMO SIMULATION CONTROL PANEL (DRAWER) -->
+  <div id="controlPanel" class="fixed bottom-0 inset-x-0 z-50 transform translate-y-full transition-transform duration-500 ease-in-out glass-panel rounded-t-3xl p-6 max-w-xl mx-auto shadow-2xl border-t border-zinc-700">
+    <div class="flex justify-between items-center mb-4">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-sliders text-brand-neon"></i>
+        <h3 class="font-mono text-sm font-bold tracking-wider text-white uppercase">PRELOADER CONTROL CENTER</h3>
+      </div>
+      <button onclick="toggleControlPanel()" class="text-zinc-400 hover:text-white p-1">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+      <button onclick="setSpeed(1500, 'FAST')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
+        FAST (1.5s)
+      </button>
+      <button onclick="setSpeed(3500, 'NORMAL')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
+        NORMAL (3.5s)
+      </button>
+      <button onclick="setSpeed(7000, 'SLOW')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
+        SLOW (7s)
+      </button>
+      <button onclick="setSpeed(Infinity, 'INFINITE')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
+        INFINITE
+      </button>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <button onclick="restartLoader()" class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white py-3 rounded-xl font-mono text-xs tracking-wider uppercase font-bold flex items-center justify-center space-x-2 transition">
+        <i class="fa-solid fa-rotate-right text-brand-neon"></i>
+        <span>RESTART ANIMATION</span>
+      </button>
+      <button onclick="instantFinish()" class="flex-1 bg-brand-neon hover:bg-white text-black py-3 rounded-xl font-mono text-xs tracking-wider uppercase font-bold flex items-center justify-center space-x-2 transition">
+        <i class="fa-solid fa-bolt"></i>
+        <span>SKIP TO 100%</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN BOUTIQUE WEBSITE PREVIEW (EMERGES AFTER LOADER) -->
+  <main id="mainSite" class="min-h-screen bg-[#070708] text-white opacity-0 transition-opacity duration-1000">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-30 glass-panel border-b border-zinc-800/80 px-6 py-4">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-8">
+          <span class="font-display text-xl font-extrabold tracking-tighter text-white">TOP BOYS KICKS</span>
+          <nav class="hidden md:flex space-x-6 font-mono text-xs tracking-wider text-zinc-400">
+            <a href="#drops" class="hover:text-brand-neon transition">NEW DROPS</a>
+            <a href="#sneakers" class="hover:text-brand-neon transition">FOOTWEAR</a>
+            <a href="#streetwear" class="hover:text-brand-neon transition">APPAREL</a>
+            <a href="#vault" class="hover:text-brand-neon transition">THE VAULT</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <div class="relative hidden sm:block">
+            <input type="text" placeholder="Search heat, dunks, box logos..." class="bg-zinc-900 border border-zinc-800 text-xs font-mono text-white rounded-full px-4 py-2 w-64 focus:outline-none focus:border-brand-neon">
+            <i class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-zinc-500 text-xs"></i>
+          </div>
+          <button class="glass-button p-2.5 rounded-full w-9 h-9 flex items-center justify-center relative">
+            <i class="fa-solid fa-bag-shopping text-sm text-zinc-300"></i>
+            <span class="absolute -top-1 -right-1 bg-brand-neon text-black font-mono font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">3</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section Preview -->
+    <section class="relative min-h-[85vh] flex items-center justify-center px-6 overflow-hidden">
+      <!-- Background Ambient Glow -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-neon/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="absolute bottom-10 right-10 w-80 h-80 bg-brand-cyan/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div class="max-w-5xl mx-auto text-center z-10 py-12">
+        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-neon animate-ping"></span>
+          <span class="font-mono text-xs tracking-widest text-zinc-300 uppercase">WEEKLY HYPEDROP #042 IS NOW LIVE</span>
+        </div>
+
+        <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter uppercase leading-none mb-6">
+          NEVER MISS <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon via-brand-cyan to-white">THE DROP</span>
+        </h1>
+
+        <p class="font-mono text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto mb-10 tracking-wide uppercase">
+          100% Verified Authentic Sneakers, Rare Grail Apparel, and Streetwear Collectibles Shipped Worldwide.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button class="w-full sm:w-auto px-8 py-4 bg-brand-neon text-black rounded-full font-mono text-sm font-bold tracking-wider uppercase hover:bg-white hover:shadow-[0_0_25px_rgba(204,255,0,0.5)] transition">
+            SHOP LATEST HEAT
+          </button>
+          <button class="w-full sm:w-auto px-8 py-4 glass-button rounded-full font-mono text-sm font-bold tracking-wider uppercase text-white hover:border-white transition">
+            ENTER RAFFLES
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products Showcase Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <div class="flex justify-between items-end mb-10">
+        <div>
+          <span class="font-mono text-xs text-brand-neon tracking-widest uppercase">CURATED SELECTION</span>
+          <h2 class="font-display text-3xl md:text-4xl font-extrabold uppercase">FEATURED GRAILS</h2>
+        </div>
+        <a href="#" class="font-mono text-xs text-zinc-400 hover:text-brand-neon tracking-wider uppercase flex items-center space-x-2">
+          <span>VIEW ALL DROPS</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Grid Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="glass-panel rounded-2xl p-4 group hover:border-brand-neon/50 transition duration-300">
+          <div class="relative h-64 rounded-xl bg-zinc-900/80 flex items-center justify-center overflow-hidden mb-4">
+            <span class="absolute top-3 left-3 bg-black/60 border border-zinc-800 px-2.5 py-1 rounded-md font-mono text-[10px] text-brand-neon uppercase">DEADSTOCK</span>
+            <i class="fa-solid fa-shoe-prints text-7xl text-zinc-800 group-hover:scale-110 group-hover:text-brand-neon transition duration-500"></i>
+          </div>
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">JORDAN BRAND</p>
+              <h3 class="font-display text-lg font-bold group-hover:text-brand-neon transition">Air Jordan 1 High OG 'Chicago'</h3>
+            </div>
+            <span class="font-mono text-sm font-bold text-white">$480</span>
+          </div>
+          <button class="w-full mt-2 py-2.5 glass-button rounded-lg font-mono text-xs uppercase tracking-wider font-bold text-zinc-300 group-hover:bg-brand-neon group-hover:text-black transition">
+            QUICK ADD
+          </button>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass-panel rounded-2xl p-4 group hover:border-brand-cyan/50 transition duration-300">
+          <div class="relative h-64 rounded-xl bg-zinc-900/80 flex items-center justify-center overflow-hidden mb-4">
+            <span class="absolute top-3 left-3 bg-black/60 border border-zinc-800 px-2.5 py-1 rounded-md font-mono text-[10px] text-brand-cyan uppercase">RARE DROP</span>
+            <i class="fa-solid fa-vest text-7xl text-zinc-800 group-hover:scale-110 group-hover:text-brand-cyan transition duration-500"></i>
+          </div>
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">OFF-WHITE</p>
+              <h3 class="font-display text-lg font-bold group-hover:text-brand-cyan transition">Utility Tactical Puffer Jacket</h3>
+            </div>
+            <span class="font-mono text-sm font-bold text-white">$1,250</span>
+          </div>
+          <button class="w-full mt-2 py-2.5 glass-button rounded-lg font-mono text-xs uppercase tracking-wider font-bold text-zinc-300 group-hover:bg-brand-cyan group-hover:text-black transition">
+            QUICK ADD
+          </button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass-panel rounded-2xl p-4 group hover:border-brand-accent/50 transition duration-300">
+          <div class="relative h-64 rounded-xl bg-zinc-900/80 flex items-center justify-center overflow-hidden mb-4">
+            <span class="absolute top-3 left-3 bg-black/60 border border-zinc-800 px-2.5 py-1 rounded-md font-mono text-[10px] text-brand-accent uppercase">EXCLUSIVE</span>
+            <i class="fa-solid fa-gem text-7xl text-zinc-800 group-hover:scale-110 group-hover:text-brand-accent transition duration-500"></i>
+          </div>
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">TRAVIS SCOTT x NIKE</p>
+              <h3 class="font-display text-lg font-bold group-hover:text-brand-accent transition">Reverse Mocha Low OG</h3>
+            </div>
+            <span class="font-mono text-sm font-bold text-white">$1,100</span>
+          </div>
+          <button class="w-full mt-2 py-2.5 glass-button rounded-lg font-mono text-xs uppercase tracking-wider font-bold text-zinc-300 group-hover:bg-brand-accent group-hover:text-white transition">
+            QUICK ADD
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/80 py-8 px-6 text-center font-mono text-xs text-zinc-500">
+      <p>© 2026 TOP BOYS KICKS (TOPBOYSKICKS.COM). ALL RIGHTS RESERVED.</p>
+    </footer>
+  </main>
+
+  <!-- JAVASCRIPT STATE MANAGEMENT & AUDIO SYNTHESIS -->
+  <script>
+    // State Variables
+    let progress = 0;
+    let duration = 3500; // Default 3.5s
+    let intervalId = null;
+    let audioEnabled = false;
+    let audioCtx = null;
+    
+    // Rotating Quotes
+    const statusQuotes = [
+      "AUTHENTICATING HEAT...",
+      "UNBOXING FRESH DROPS...",
+      "CHECKING SOLES & STITCHES...",
+      "SECURING THE HYPE...",
+      "VERIFYING DEADSTOCK STATUS...",
+      "READY TO STEP UP"
+    ];
+
+    // Web Audio API Synthesizer (No external audio dependencies)
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+    }
+
+    function playSound(type) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'tick') {
+          // Subtle high frequency UI tick
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(400, now + 0.03);
+          gain.gain.setValueAtTime(0.02, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.03);
+          osc.start(now);
+          osc.stop(now + 0.03);
+        } else if (type === 'complete') {
+          // Futuristic triumph chime
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.3);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'squeak') {
+          // Playful sneaker squeak sound synthesis
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(1200, now);
+          osc.frequency.linearRampToValueAtTime(2400, now + 0.08);
+          osc.frequency.linearRampToValueAtTime(1800, now + 0.15);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.15);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        }
+      } catch(e) {
+        console.warn("Audio synthesis error:", e);
+      }
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const icon = document.getElementById('audioIcon');
+      const text = document.getElementById('audioText');
+      
+      if (audioEnabled) {
+        initAudio();
+        icon.className = 'fa-solid fa-volume-high text-brand-neon';
+        text.innerText = 'SOUND: ON';
+        playSound('squeak');
+      } else {
+        icon.className = 'fa-solid fa-volume-xmark text-zinc-400';
+        text.innerText = 'SOUND: OFF';
+      }
+    }
+
+    // Loader Core Logic
+    const progressCircle = document.getElementById('progressCircle');
+    const loaderPercent = document.getElementById('loaderPercent');
+    const statusQuote = document.getElementById('statusQuote');
+    const sneakerPaths = document.querySelectorAll('.sneaker-path');
+    const enterBtn = document.getElementById('enterBtn');
+    const bottomTagline = document.getElementById('bottomTagline');
+
+    const circleCircumference = 2 * Math.PI * 44; // r=44 => ~276.46
+
+    function updateProgress(val) {
+      progress = Math.min(Math.max(val, 0), 100);
+      
+      // Update SVG Circle
+      const offset = circleCircumference - (progress / 100) * circleCircumference;
+      progressCircle.style.strokeDashoffset = offset;
+      
+      // Update Text Percentage
+      loaderPercent.innerText = `${Math.floor(progress)}%`;
+
+      // Update Sneaker SVG Line Tracing
+      sneakerPaths.forEach(path => {
+        const totalLen = 1200;
+        const drawLen = totalLen - (progress / 100) * totalLen;
+        path.style.strokeDashoffset = drawLen;
+      });
+
+      // Update Dynamic Quotes based on progress phase
+      const quoteIndex = Math.min(
+        Math.floor((progress / 100) * statusQuotes.length),
+        statusQuotes.length - 1
+      );
+      if (statusQuote.innerText !== statusQuotes[quoteIndex]) {
+        statusQuote.style.opacity = '0';
+        setTimeout(() => {
+          statusQuote.innerText = statusQuotes[quoteIndex];
+          statusQuote.style.opacity = '1';
+        }, 150);
+        playSound('tick');
+      }
+
+      // Check Completion
+      if (progress >= 100) {
+        onLoaderComplete();
+      }
+    }
+
+    function startLoading() {
+      if (intervalId) clearInterval(intervalId);
+      
+      let startTime = Date.now();
+      let initialProgress = progress;
+
+      if (duration === Infinity) {
+        // Infinite slow loop bounce
+        intervalId = setInterval(() => {
+          progress = (progress + 0.5) % 99;
+          updateProgress(progress);
+        }, 100);
+        return;
+      }
+
+      intervalId = setInterval(() => {
+        let elapsed = Date.now() - startTime;
+        let p = initialProgress + (elapsed / duration) * (100 - initialProgress);
+        
+        if (p >= 100) {
+          p = 100;
+          clearInterval(intervalId);
+        }
+        updateProgress(p);
+      }, 30);
+    }
+
+    function onLoaderComplete() {
+      playSound('complete');
+      
+      // Reveal the "ENTER THE VAULT" button
+      enterBtn.disabled = false;
+      enterBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      enterBtn.classList.add('opacity-100', 'translate-y-0');
+      
+      // Glow and pulse enter button
+      enterBtn.classList.add('animate-bounce');
+      setTimeout(() => enterBtn.classList.remove('animate-bounce'), 1500);
+
+      bottomTagline.style.opacity = '0.4';
+    }
+
+    // Demo Speed Controls
+    function setSpeed(ms, label) {
+      duration = ms;
+      restartLoader();
+    }
+
+    function restartLoader() {
+      progress = 0;
+      enterBtn.disabled = true;
+      enterBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      enterBtn.classList.remove('opacity-100', 'translate-y-0');
+      bottomTagline.style.opacity = '1';
+      startLoading();
+    }
+
+    function instantFinish() {
+      if (intervalId) clearInterval(intervalId);
+      updateProgress(100);
+    }
+
+    function toggleControlPanel() {
+      const panel = document.getElementById('controlPanel');
+      panel.classList.toggle('translate-y-full');
+      playSound('squeak');
+    }
+
+    // Transition to Main Site
+    function revealSite() {
+      playSound('squeak');
+      const preloader = document.getElementById('preloader');
+      const mainSite = document.getElementById('mainSite');
+      
+      // Curtain Reveal Curtain Effect
+      preloader.style.transform = 'translateY(-100%)';
+      
+      setTimeout(() => {
+        mainSite.classList.remove('opacity-0');
+        mainSite.classList.add('opacity-100');
+        document.body.style.overflowY = 'auto';
+      }, 400);
+    }
+
+    // BACKGROUND PARTICLES CANVAS
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.alpha = Math.random() * 0.6 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.fillStyle = `rgba(204, 255, 0, ${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const particleCount = Math.floor(window.innerWidth / 20);
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    // Initialization on window load
+    window.onload = function() {
+      initParticles();
+      animateParticles();
+      startLoading();
+    };
+  </script>
+</body>
+</html>
