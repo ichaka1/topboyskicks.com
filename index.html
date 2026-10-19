@@ -1,733 +1,414 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#070708] text-white">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOP BOYS KICKS | Curated Heat & Exclusive Drops</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Space Grotesk & Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Syne', 'sans-serif'],
-            mono: ['Space Grotesk', 'monospace'],
-          },
-          colors: {
-            brand: {
-              black: '#070708',
-              card: '#0e0f12',
-              neon: '#ccff00',
-              silver: '#e2e8f0',
-              cyan: '#00f0ff',
-              gold: '#ffd700',
-              accent: '#ff0055'
-            }
-          },
-          animation: {
-            'glow-pulse': 'glow 2.5s infinite alternate',
-            'float-slow': 'float 4s ease-in-out infinite',
-            'spin-slow': 'spin 12s linear infinite',
-            'glitch': 'glitch 1s infinite linear alternate-reverse',
-            'shimmer': 'shimmer 2s linear infinite',
-          },
-          keyframes: {
-            glow: {
-              '0%': { filter: 'drop-shadow(0 0 10px rgba(204,255,0,0.3))' },
-              '100%': { filter: 'drop-shadow(0 0 28px rgba(204,255,0,0.85))' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-              '50%': { transform: 'translateY(-12px) rotate(-2deg)' },
-            },
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' }
-            }
-          }
-        }
-      }
-    }
-  </script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#c90025" />
+  <meta name="description" content="Top Boys Kicks. Your adventure starts here." />
+  <title>Top Boys Kicks | Your Adventure Starts Here</title>
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
+    :root {
+      --red: #c90025;
+      --red-dark: #98001c;
+      --black: #111;
+      --white: #fff;
+      --muted: #777;
+      --radius: 22px;
+      --header-height: 76px;
+      --ease: cubic-bezier(.2,.75,.25,1);
     }
-    ::-webkit-scrollbar-track {
-      background: #070708;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body {
+      margin: 0;
+      background: #222;
+      color: var(--black);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #1a1c23;
-      border-radius: 3px;
+    body.is-loading { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    a, button { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #ff7c93; outline-offset: 4px; }
+    svg { display: block; }
+    .site { width: 100%; overflow: clip; background: var(--white); }
+    .screen {
+      position: relative;
+      min-height: 100svh;
+      min-height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      isolation: isolate;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #ccff00;
+    .screen-inner { width: min(100%, 1120px); margin: 0 auto; padding: 90px 28px 48px; }
+    .site-header {
+      position: fixed;
+      z-index: 100;
+      top: 0; left: 0; right: 0;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(18px, 4vw, 52px);
+      color: var(--white);
+      transition: background .3s ease, box-shadow .3s ease, color .3s ease;
     }
-
-    /* Glassmorphism elements */
-    .glass-panel {
-      background: rgba(14, 15, 18, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .site-header.scrolled { background: #111f; box-shadow: 0 5px 25px #0002; backdrop-filter: blur(12px); }
+    .site-header.light-header { color: var(--black); }
+    .site-header.light-header.scrolled { background: #fffffff2; }
+    .brand-lockup { display: inline-flex; align-items: center; gap: 10px; font-weight: 950; text-transform: uppercase; letter-spacing: -.6px; }
+    .brand-symbol {
+      display: grid; place-items: center; width: 43px; height: 43px;
+      background: var(--white); color: var(--black); border-radius: 0 0 14px 14px;
+      font-size: 13px; line-height: .85; text-align: center; box-shadow: 0 4px 16px #0002;
     }
-    .glass-button {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    .brand-symbol b { color: var(--red); }
+    .brand-name { font-size: 13px; line-height: 1.05; }
+    .brand-name small { display: block; margin-top: 4px; font-size: 9px; letter-spacing: 3px; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .header-cta { font-size: 12px; font-weight: 800; padding: 12px 17px; border-radius: 999px; background: var(--red); color: white; }
+    .menu-button {
+      width: 42px; height: 42px; border: 0; border-radius: 50%;
+      display: grid; place-items: center; cursor: pointer;
+      color: inherit; background: #ffffff20;
     }
-    .glass-button:hover {
-      background: rgba(204, 255, 0, 0.15);
-      border-color: #ccff00;
-      color: #ccff00;
-      box-shadow: 0 0 15px rgba(204, 255, 0, 0.25);
+    .light-header .menu-button { background: #1111110d; }
+    .eyebrow { margin: 0 0 14px; font-size: 10px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { margin-bottom: 0; font-weight: 950; text-transform: uppercase; letter-spacing: -.045em; line-height: .94; }
+    h1 { max-width: 780px; font-size: clamp(46px, 10vw, 108px); }
+    h2 { font-size: clamp(38px, 7vw, 76px); }
+    .copy { max-width: 470px; margin: 20px 0 26px; font-size: clamp(14px, 1.6vw, 17px); line-height: 1.65; }
+    .button {
+      min-height: 52px; padding: 0 22px; display: inline-flex; align-items: center; justify-content: center;
+      gap: 11px; border-radius: 15px; border: 0; background: var(--red); color: white;
+      font-size: 13px; font-weight: 850; transition: transform .25s var(--ease), background .25s ease;
     }
-
-    /* Metallic Text Shimmer Effect */
-    .text-metallic {
-      background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 40%, #ffffff 60%, #52525b 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 4s linear infinite;
+    .button:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .button.white { background: white; color: var(--black); }
+    .button.white:hover { background: #eee; }
+    .button.dark { background: var(--black); color: white; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero { color: white; justify-content: flex-end; background: #1b1b1b; }
+    .hero::before, .hero::after, .story::before {
+      content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
     }
-
-    /* Sneaker Trace Line Animation */
-    .sneaker-path {
-      stroke-dasharray: 1200;
-      stroke-dashoffset: 1200;
-      transition: stroke-dashoffset 0.1s linear;
+    .hero::before { background: url("assets/hero-sneaker.jpg") center / cover no-repeat; }
+    .hero::after { z-index: 0; background: linear-gradient(90deg,#0009 0%,#0003 60%,#0001 100%),linear-gradient(0deg,#000c 0%,transparent 75%); }
+    .hero .screen-inner { position: relative; z-index: 1; width: min(100%, 1120px); padding-top: 140px; padding-bottom: clamp(55px, 10vh, 100px); }
+    .hero .eyebrow { color: #ffd6de; }
+    .hero .copy { color: #f2f2f2; }
+    .hero-index { position: absolute; right: clamp(22px, 5vw, 70px); bottom: 60px; z-index: 1; writing-mode: vertical-rl; color: #ffffffa6; font-size: 10px; letter-spacing: 3px; }
+    .scroll-cue { position: absolute; z-index: 1; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 9px; color: #ffffffb5; font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+    .scroll-cue span { width: 28px; height: 1px; background: var(--red); }
+    .story { background: var(--red); color: white; }
+    .story::before {
+      background: linear-gradient(90deg,#8e001bde 0%,#a90020a8 45%,#92001b52 100%), url("assets/brand-campaign.jpg") center / cover no-repeat;
     }
-
-    /* Grid pattern background */
-    .bg-grid {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 0);
-      background-size: 32px 32px;
+    .story .screen-inner { position: relative; z-index: 1; }
+    .story .eyebrow { color: #ffd6de; }
+    .story .copy { color: #fff; }
+    .story-number { position: absolute; right: 3vw; bottom: 2vh; font-size: clamp(100px, 25vw, 320px); line-height: .8; font-weight: 950; letter-spacing: -.09em; color: #ffffff0c; z-index: -1; }
+    .feature { background: #f4f4f4; }
+    .feature .screen-inner { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(24px, 6vw, 76px); }
+    .section-tag { color: var(--red); }
+    .feature-card { padding: 13px; border-radius: 27px; background: var(--red); color: white; box-shadow: 0 25px 65px #8b001c24; transform: rotate(1.2deg); }
+    .feature-card-top { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; padding: 12px 10px 17px; }
+    .feature-card h3 { margin: 0 0 6px; font-size: 17px; }
+    .feature-card p { margin: 0; font-size: 11px; color: #ffe2e7; line-height: 1.4; }
+    .feature-price { font-size: 14px; font-weight: 900; white-space: nowrap; }
+    .feature-photo { width: 100%; aspect-ratio: 1 / .88; display: block; object-fit: cover; border-radius: 19px; background: #8d001a; }
+    .feature-card-bottom { display: flex; justify-content: space-between; align-items: center; padding: 14px 8px 5px; font-size: 12px; font-weight: 850; }
+    .circle-link { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; color: var(--black); background: white; }
+    .social { background: white; }
+    .social .screen-inner { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(24px, 7vw, 90px); align-items: start; }
+    .social .copy { color: #555; }
+    .link-list { display: grid; gap: 12px; }
+    .link-item { min-height: 70px; padding: 13px 16px; display: flex; align-items: center; gap: 14px; background: var(--red); color: white; border-radius: 17px; transition: transform .25s var(--ease), background .25s ease; }
+    .link-item:hover { transform: translateX(4px); background: var(--red-dark); }
+    .link-icon { width: 39px; height: 39px; flex: 0 0 39px; display: grid; place-items: center; background: #ffffff20; border-radius: 12px; }
+    .link-copy { flex: 1; min-width: 0; }
+    .link-copy strong { display: block; font-size: 13px; }
+    .link-copy small { display: block; margin-top: 4px; color: #ffe0e6; font-size: 10px; }
+    .link-arrow { opacity: .9; }
+    .social-note { margin-top: 20px; font-size: 11px; line-height: 1.6; color: #777; }
+    .footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #888; font-size: 10px; }
+    .footer strong { color: #222; letter-spacing: 1px; }
+    .section-nav {
+      position: fixed; z-index: 90; right: clamp(12px, 2.5vw, 34px); top: 50%;
+      transform: translateY(-50%); display: grid; gap: 12px;
     }
-
-    /* Scanline Overlay for Cyberpunk Vibe */
-    .scanlines {
-      background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0),
-        rgba(255,255,255,0) 50%,
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(0, 0, 0, 0.3)
-      );
-      background-size: 100% 4px;
+    .section-nav button {
+      width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%;
+      background: #ffffff70; cursor: pointer; transition: transform .2s, background .2s;
+      box-shadow: 0 0 0 1px #0001;
+    }
+    .section-nav button.active { background: var(--red); transform: scale(1.35); }
+    .section-nav.dark-dots button { background: #1114; }
+    .section-nav.dark-dots button.active { background: var(--red); }
+    .progress { position: fixed; z-index: 120; top: 0; left: 0; height: 3px; width: 0; background: var(--red); transition: width .15s linear; }
+    .loader {
+      position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center;
+      background: var(--black); color: white; opacity: 1; visibility: visible;
+      transition: opacity .45s ease, visibility .45s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-inner { text-align: center; padding: 24px; }
+    .loader-logo { font-size: clamp(45px, 12vw, 72px); font-weight: 950; line-height: .78; letter-spacing: -.09em; }
+    .loader-logo .red { color: var(--red); }
+    .loader-kicks { margin-top: 12px; font-size: 9px; font-weight: 900; letter-spacing: 5px; }
+    .loader-bar { width: 118px; height: 3px; overflow: hidden; margin: 29px auto 0; background: #ffffff22; border-radius: 99px; }
+    .loader-bar::after { content: ""; display: block; height: 100%; width: 40%; background: var(--red); animation: loading 1s ease-in-out infinite; }
+    @keyframes loading { from { transform: translateX(-110%); } to { transform: translateX(360%); } }
+    .mobile-menu { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 34px; background: var(--red); color: white; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: .25s ease; }
+    .mobile-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mobile-menu a { font-size: clamp(30px, 8vw, 52px); line-height: 1; text-transform: uppercase; font-weight: 950; letter-spacing: -.04em; }
+    .close-menu { position: absolute; right: 22px; top: 20px; border: 0; background: #ffffff22; color: white; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; }
+    @media (max-width: 700px) {
+      html { scroll-snap-type: y proximity; }
+      .screen { min-height: 100svh; }
+      .screen-inner { padding: 95px 23px 55px; }
+      .hero .screen-inner { padding-bottom: 90px; }
+      .hero-index { display: none; }
+      .feature .screen-inner, .social .screen-inner { grid-template-columns: 1fr; gap: 26px; align-content: center; }
+      .feature .screen-inner { padding-top: 100px; padding-bottom: 80px; }
+      .feature-card { max-width: 430px; width: 100%; margin: 0 auto; }
+      .feature .copy { margin-bottom: 18px; }
+      .social .screen-inner { padding-top: 100px; padding-bottom: 70px; }
+      .social .copy { margin-bottom: 20px; }
+      .section-nav { right: 12px; gap: 11px; }
+      .section-nav button { width: 7px; height: 7px; }
+      .footer { position: relative; padding: 16px 23px; background: white; }
+      .header-cta { display: none; }
+    }
+    @media (max-height: 650px) and (min-width: 701px) {
+      .screen-inner { padding-top: 78px; padding-bottom: 30px; }
+      h1 { font-size: clamp(42px, 8vh, 76px); }
+      h2 { font-size: clamp(35px, 7vh, 60px); }
+      .copy { margin: 13px 0 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      html { scroll-snap-type: none; }
     }
   </style>
 </head>
-
-<body class="h-full overflow-x-hidden font-sans select-none antialiased bg-[#070708]">
-
-  <!-- Ambient Sound Toggle & Status Top Bar -->
-  <div class="fixed top-5 left-5 right-5 z-50 flex justify-between items-center pointer-events-auto">
-    <div class="flex items-center space-x-3">
-      <div class="w-3 h-3 rounded-full bg-brand-neon animate-pulse"></div>
-      <span class="font-mono text-xs tracking-widest text-zinc-400 uppercase">SERVER: TOKYO-DROP-01 // LIVE</span>
-    </div>
-    
-    <div class="flex items-center space-x-3">
-      <!-- Audio Toggle Button -->
-      <button id="audioToggle" onclick="toggleAudio()" class="glass-button px-4 py-2 rounded-full text-xs font-mono flex items-center space-x-2 text-zinc-300 hover:text-white transition">
-        <i id="audioIcon" class="fa-solid fa-volume-xmark text-zinc-400"></i>
-        <span id="audioText" class="uppercase tracking-wider">SOUND: OFF</span>
-      </button>
-
-      <!-- Speed Control Trigger Toggle -->
-      <button onclick="toggleControlPanel()" class="glass-button px-4 py-2 rounded-full text-xs font-mono flex items-center space-x-2 text-zinc-300">
-        <i class="fa-solid fa-sliders text-brand-neon"></i>
-        <span class="hidden sm:inline uppercase tracking-wider">DEMO CONTROLS</span>
-      </button>
+<body class="is-loading">
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="loader" id="loader" role="status" aria-label="Loading Top Boys Kicks">
+    <div class="loader-inner">
+      <div class="loader-logo">TO<span class="red">P</span><br>BO<span class="red">Y</span>S</div>
+      <div class="loader-kicks">KICKS</div>
+      <div class="loader-bar" aria-hidden="true"></div>
     </div>
   </div>
 
-  <!-- MAIN PRELOADER SCREEN OVERLAY -->
-  <div id="preloader" class="fixed inset-0 z-40 flex flex-col justify-between p-6 md:p-12 transition-all duration-1000 ease-in-out bg-[#070708] overflow-hidden">
-    
-    <!-- Background Canvas Particles -->
-    <canvas id="particleCanvas" class="absolute inset-0 z-0 pointer-events-none opacity-40"></canvas>
-    
-    <!-- Subtle Grid Overlay -->
-    <div class="absolute inset-0 bg-grid pointer-events-none opacity-30"></div>
-    <div class="absolute inset-0 scanlines pointer-events-none opacity-20"></div>
-
-    <!-- Top Branding Section -->
-    <div class="relative z-10 flex flex-col items-center mt-12 md:mt-6">
-      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/80 mb-3 text-[11px] font-mono tracking-widest text-zinc-400 uppercase">
-        <i class="fa-solid fa-certificate text-brand-neon"></i>
-        <span>VERIFIED AUTHENTIC HEAT</span>
-      </div>
-      <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-metallic text-center uppercase">
-        TOP BOYS KICKS
-      </h1>
-      <p class="font-mono text-xs sm:text-sm text-zinc-400 tracking-widest mt-2 uppercase text-center">
-        Curated Heat <span class="text-brand-neon">•</span> Exclusive Drops <span class="text-brand-neon">•</span> Culture
-      </p>
+  <header class="site-header" id="siteHeader">
+    <a class="brand-lockup" href="#home" aria-label="Top Boys Kicks home">
+      <span class="brand-symbol">T<span><b>B</b></span><br>K</span>
+      <span class="brand-name">Top Boys<small>KICKS</small></span>
+    </a>
+    <div class="header-actions">
+      <a class="header-cta" href="#featured">Explore the kicks</a>
+      <button class="menu-button" id="menuOpen" aria-label="Open navigation menu" aria-expanded="false">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
+  </header>
 
-    <!-- Center Hero Loader Graphic -->
-    <div class="relative z-10 flex-1 flex flex-col items-center justify-center my-6">
-      <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+  <nav class="section-nav" id="sectionNav" aria-label="Page sections">
+    <button class="active" data-target="home" aria-label="Go to introduction" title="Introduction"></button>
+    <button data-target="story" aria-label="Go to brand story" title="Brand story"></button>
+    <button data-target="featured" aria-label="Go to featured kicks" title="Featured kicks"></button>
+    <button data-target="connect" aria-label="Go to social links" title="Connect"></button>
+  </nav>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Main navigation" aria-hidden="true">
+    <button class="close-menu" id="menuClose" aria-label="Close navigation menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+    <a href="#home">Home</a>
+    <a href="#story">The brand</a>
+    <a href="#featured">Featured kicks</a>
+    <a href="#connect">Connect with us</a>
+  </nav>
+
+  <main class="site">
+    <section class="screen hero" id="home" aria-labelledby="hero-title">
+      <div class="screen-inner">
         
-        <!-- Circular Progress Ring (SVG) -->
-        <svg class="absolute inset-0 w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
-          <!-- Background Track -->
-          <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="2.5" class="text-zinc-800/80" fill="transparent" />
-          <!-- Neon Progress Arc -->
-          <circle id="progressCircle" cx="50" cy="50" r="44" stroke="url(#neonGradient)" stroke-width="3.5" 
-                  stroke-linecap="round" class="transition-all duration-150 ease-out" 
-                  fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="276.46" />
-          
-          <defs>
-            <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ccff00" />
-              <stop offset="50%" stop-color="#00f0ff" />
-              <stop offset="100%" stop-color="#ff0055" />
-            </linearGradient>
-          </defs>
-        </svg>
-
-        <!-- Outer Rotating Rings -->
-        <div class="absolute inset-2 rounded-full border border-dashed border-zinc-800/60 animate-spin-slow pointer-events-none"></div>
-        <div class="absolute inset-6 rounded-full border border-zinc-800/40 pointer-events-none"></div>
-
-        <!-- Animated Sneaker Graphic (Vector Drawing & Float) -->
-        <div class="relative z-10 w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center animate-float-slow animate-glow-pulse">
-          <svg id="sneakerSvg" class="w-full h-full filter drop-shadow-[0_10px_20px_rgba(204,255,0,0.25)]" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Sneaker Outline Path for Stroke Animation -->
-            <path class="sneaker-path" d="M 50 220 
-                     C 50 220, 40 210, 40 190 
-                     C 40 170, 70 160, 110 160 
-                     C 130 140, 160 110, 200 90 
-                     C 240 70, 290 60, 330 80 
-                     C 360 95, 380 120, 410 145 
-                     C 430 160, 460 170, 460 190 
-                     C 460 210, 440 220, 420 225 
-                     C 380 230, 100 230, 50 220 Z" 
-                  stroke="#ccff00" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none" />
-            
-            <!-- Midsole & Sole details -->
-            <path class="sneaker-path" d="M 40 210 L 460 210 M 50 225 L 440 225 M 120 160 L 220 180 M 230 110 L 260 170 M 280 100 L 310 160 M 330 120 L 380 150" 
-                  stroke="#00f0ff" stroke-width="3" stroke-linecap="round" fill="none" />
-            
-            <!-- Swoosh / Signature Stripe Accent -->
-            <path class="sneaker-path" d="M 140 170 Q 240 200 390 120 Q 280 210 170 185 Z" 
-                  fill="rgba(204,255,0,0.15)" stroke="#ccff00" stroke-width="4" stroke-linejoin="round" />
-
-            <!-- Heel & Collar Details -->
-            <path class="sneaker-path" d="M 330 80 C 350 50, 390 60, 410 90 L 420 140" stroke="#ff0055" stroke-width="4" stroke-linecap="round" />
-            
-            <!-- Air Bubble Window detail -->
-            <rect x="350" y="212" width="50" height="10" rx="5" stroke="#00f0ff" stroke-width="2" fill="rgba(0,240,255,0.2)" />
-          </svg>
-        </div>
-
-        <!-- Center Counter Percentage Text -->
-        <div class="absolute bottom-6 flex flex-col items-center">
-          <span id="loaderPercent" class="font-mono text-3xl sm:text-4xl font-bold tracking-tight text-white">0%</span>
+        <h1 id="hero-title">It shouldn't cost that much to look good.</h1>
+        <p class="copy">Your next favourite pair starts here. Explore the kicks, get to know the brand, and find your way to us.</p>
+        <div class="button-row">
+          <a class="button" href="#featured">Explore the kicks
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a class="button white" href="#story">Meet the brand</a>
         </div>
       </div>
+      <div class="hero-index">01 / TOP BOYS KICKS</div>
+      <a class="scroll-cue" href="#story"><span></span> Scroll to explore <span></span></a>
+    </section>
 
-      <!-- Hype Dynamic Status Quote Message -->
-      <div class="mt-8 text-center h-8 flex items-center justify-center">
-        <p id="statusQuote" class="font-mono text-xs sm:text-sm text-brand-neon tracking-widest uppercase transition-opacity duration-300">
-          INITIALIZING DROP SYSTEM...
-        </p>
-      </div>
-    </div>
-
-    <!-- Bottom Actions / Enter Button Container -->
-    <div class="relative z-10 flex flex-col items-center justify-center mb-4">
-      <!-- Enter Site Trigger Button (Active on 100%) -->
-      <button id="enterBtn" onclick="revealSite()" disabled 
-              class="opacity-0 pointer-events-none transform translate-y-4 transition-all duration-500 ease-out px-10 py-4 rounded-full font-mono text-sm font-bold tracking-wider uppercase bg-brand-neon text-black hover:bg-white hover:shadow-[0_0_30px_rgba(204,255,0,0.8)] flex items-center space-x-3 cursor-pointer">
-        <span>ENTER THE VAULT</span>
-        <i class="fa-solid fa-arrow-right"></i>
-      </button>
-
-      <!-- Bottom Tagline / Copyright -->
-      <div id="bottomTagline" class="transition-opacity duration-300 mt-2 text-center">
-        <p class="font-mono text-[10px] sm:text-xs text-zinc-500 tracking-widest uppercase">
-          TOP BOYS KICKS LIMITED EDITION • ALL RIGHTS RESERVED 2026
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- INTERACTIVE DEMO SIMULATION CONTROL PANEL (DRAWER) -->
-  <div id="controlPanel" class="fixed bottom-0 inset-x-0 z-50 transform translate-y-full transition-transform duration-500 ease-in-out glass-panel rounded-t-3xl p-6 max-w-xl mx-auto shadow-2xl border-t border-zinc-700">
-    <div class="flex justify-between items-center mb-4">
-      <div class="flex items-center space-x-2">
-        <i class="fa-solid fa-sliders text-brand-neon"></i>
-        <h3 class="font-mono text-sm font-bold tracking-wider text-white uppercase">PRELOADER CONTROL CENTER</h3>
-      </div>
-      <button onclick="toggleControlPanel()" class="text-zinc-400 hover:text-white p-1">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-    </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
-      <button onclick="setSpeed(1500, 'FAST')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
-        FAST (1.5s)
-      </button>
-      <button onclick="setSpeed(3500, 'NORMAL')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
-        NORMAL (3.5s)
-      </button>
-      <button onclick="setSpeed(7000, 'SLOW')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
-        SLOW (7s)
-      </button>
-      <button onclick="setSpeed(Infinity, 'INFINITE')" class="speed-btn glass-button p-2.5 rounded-xl font-mono text-xs text-center border-brand-neon/40 text-white hover:bg-brand-neon/20">
-        INFINITE
-      </button>
-    </div>
-
-    <div class="flex items-center space-x-2">
-      <button onclick="restartLoader()" class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white py-3 rounded-xl font-mono text-xs tracking-wider uppercase font-bold flex items-center justify-center space-x-2 transition">
-        <i class="fa-solid fa-rotate-right text-brand-neon"></i>
-        <span>RESTART ANIMATION</span>
-      </button>
-      <button onclick="instantFinish()" class="flex-1 bg-brand-neon hover:bg-white text-black py-3 rounded-xl font-mono text-xs tracking-wider uppercase font-bold flex items-center justify-center space-x-2 transition">
-        <i class="fa-solid fa-bolt"></i>
-        <span>SKIP TO 100%</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- MAIN BOUTIQUE WEBSITE PREVIEW (EMERGES AFTER LOADER) -->
-  <main id="mainSite" class="min-h-screen bg-[#070708] text-white opacity-0 transition-opacity duration-1000">
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-30 glass-panel border-b border-zinc-800/80 px-6 py-4">
-      <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-8">
-          <span class="font-display text-xl font-extrabold tracking-tighter text-white">TOP BOYS KICKS</span>
-          <nav class="hidden md:flex space-x-6 font-mono text-xs tracking-wider text-zinc-400">
-            <a href="#drops" class="hover:text-brand-neon transition">NEW DROPS</a>
-            <a href="#sneakers" class="hover:text-brand-neon transition">FOOTWEAR</a>
-            <a href="#streetwear" class="hover:text-brand-neon transition">APPAREL</a>
-            <a href="#vault" class="hover:text-brand-neon transition">THE VAULT</a>
-          </nav>
-        </div>
-
-        <div class="flex items-center space-x-4">
-          <div class="relative hidden sm:block">
-            <input type="text" placeholder="Search heat, dunks, box logos..." class="bg-zinc-900 border border-zinc-800 text-xs font-mono text-white rounded-full px-4 py-2 w-64 focus:outline-none focus:border-brand-neon">
-            <i class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-zinc-500 text-xs"></i>
-          </div>
-          <button class="glass-button p-2.5 rounded-full w-9 h-9 flex items-center justify-center relative">
-            <i class="fa-solid fa-bag-shopping text-sm text-zinc-300"></i>
-            <span class="absolute -top-1 -right-1 bg-brand-neon text-black font-mono font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">3</span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Hero Section Preview -->
-    <section class="relative min-h-[85vh] flex items-center justify-center px-6 overflow-hidden">
-      <!-- Background Ambient Glow -->
-      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-neon/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div class="absolute bottom-10 right-10 w-80 h-80 bg-brand-cyan/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-      <div class="max-w-5xl mx-auto text-center z-10 py-12">
-        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 mb-6">
-          <span class="w-2 h-2 rounded-full bg-brand-neon animate-ping"></span>
-          <span class="font-mono text-xs tracking-widest text-zinc-300 uppercase">WEEKLY HYPEDROP #042 IS NOW LIVE</span>
-        </div>
-
-        <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter uppercase leading-none mb-6">
-          NEVER MISS <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon via-brand-cyan to-white">THE DROP</span>
-        </h1>
-
-        <p class="font-mono text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto mb-10 tracking-wide uppercase">
-          100% Verified Authentic Sneakers, Rare Grail Apparel, and Streetwear Collectibles Shipped Worldwide.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button class="w-full sm:w-auto px-8 py-4 bg-brand-neon text-black rounded-full font-mono text-sm font-bold tracking-wider uppercase hover:bg-white hover:shadow-[0_0_25px_rgba(204,255,0,0.5)] transition">
-            SHOP LATEST HEAT
-          </button>
-          <button class="w-full sm:w-auto px-8 py-4 glass-button rounded-full font-mono text-sm font-bold tracking-wider uppercase text-white hover:border-white transition">
-            ENTER RAFFLES
-          </button>
+    <section class="screen story" id="story" aria-labelledby="story-title">
+      <div class="story-number" aria-hidden="true">TBK</div>
+      <div class="screen-inner">
+        <p class="eyebrow">More than a pair of shoes</p>
+        <h2 id="story-title">Your adventure starts here.</h2>
+        <p class="copy">Good style should feel accessible. Top Boys Kicks is for people who want their footwear to say something without saying too much.</p>
+        <div class="button-row">
+          <a class="button white" href="#featured">See the featured pair
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Featured Products Showcase Grid -->
-    <section class="max-w-7xl mx-auto px-6 py-16">
-      <div class="flex justify-between items-end mb-10">
+    <section class="screen feature" id="featured" aria-labelledby="featured-title">
+      <div class="screen-inner">
         <div>
-          <span class="font-mono text-xs text-brand-neon tracking-widest uppercase">CURATED SELECTION</span>
-          <h2 class="font-display text-3xl md:text-4xl font-extrabold uppercase">FEATURED GRAILS</h2>
-        </div>
-        <a href="#" class="font-mono text-xs text-zinc-400 hover:text-brand-neon tracking-wider uppercase flex items-center space-x-2">
-          <span>VIEW ALL DROPS</span>
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- Grid Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card 1 -->
-        <div class="glass-panel rounded-2xl p-4 group hover:border-brand-neon/50 transition duration-300">
-          <div class="relative h-64 rounded-xl bg-zinc-900/80 flex items-center justify-center overflow-hidden mb-4">
-            <span class="absolute top-3 left-3 bg-black/60 border border-zinc-800 px-2.5 py-1 rounded-md font-mono text-[10px] text-brand-neon uppercase">DEADSTOCK</span>
-            <i class="fa-solid fa-shoe-prints text-7xl text-zinc-800 group-hover:scale-110 group-hover:text-brand-neon transition duration-500"></i>
+          <p class="eyebrow section-tag">The spotlight</p>
+          <h2 id="featured-title">Find your next pair.</h2>
+          <p class="copy">Put a current drop, customer favourite, or limited release in the spotlight. Give visitors a reason to click through and shop.</p>
+          <div class="button-row">
+            <a class="button" href="https://www.topboyskicks.com/" target="_blank" rel="noopener noreferrer">Shop the collection
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
           </div>
-          <div class="flex justify-between items-start mb-2">
+        </div>
+        <article class="feature-card">
+          <div class="feature-card-top">
             <div>
-              <p class="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">JORDAN BRAND</p>
-              <h3 class="font-display text-lg font-bold group-hover:text-brand-neon transition">Air Jordan 1 High OG 'Chicago'</h3>
+              <h3>Featured Kicks</h3>
+              <p>Everyday comfort. Standout style.</p>
             </div>
-            <span class="font-mono text-sm font-bold text-white">$480</span>
+            <span class="feature-price">Explore</span>
           </div>
-          <button class="w-full mt-2 py-2.5 glass-button rounded-lg font-mono text-xs uppercase tracking-wider font-bold text-zinc-300 group-hover:bg-brand-neon group-hover:text-black transition">
-            QUICK ADD
-          </button>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="glass-panel rounded-2xl p-4 group hover:border-brand-cyan/50 transition duration-300">
-          <div class="relative h-64 rounded-xl bg-zinc-900/80 flex items-center justify-center overflow-hidden mb-4">
-            <span class="absolute top-3 left-3 bg-black/60 border border-zinc-800 px-2.5 py-1 rounded-md font-mono text-[10px] text-brand-cyan uppercase">RARE DROP</span>
-            <i class="fa-solid fa-vest text-7xl text-zinc-800 group-hover:scale-110 group-hover:text-brand-cyan transition duration-500"></i>
+          <img class="feature-photo" src="assets/featured-kicks.jpg" alt="Featured sneakers from Top Boys Kicks" />
+          <div class="feature-card-bottom">
+            <span>Make this pair yours</span>
+            <a class="circle-link" href="https://www.topboyskicks.com/" target="_blank" rel="noopener noreferrer" aria-label="View featured kicks">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
           </div>
-          <div class="flex justify-between items-start mb-2">
-            <div>
-              <p class="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">OFF-WHITE</p>
-              <h3 class="font-display text-lg font-bold group-hover:text-brand-cyan transition">Utility Tactical Puffer Jacket</h3>
-            </div>
-            <span class="font-mono text-sm font-bold text-white">$1,250</span>
-          </div>
-          <button class="w-full mt-2 py-2.5 glass-button rounded-lg font-mono text-xs uppercase tracking-wider font-bold text-zinc-300 group-hover:bg-brand-cyan group-hover:text-black transition">
-            QUICK ADD
-          </button>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="glass-panel rounded-2xl p-4 group hover:border-brand-accent/50 transition duration-300">
-          <div class="relative h-64 rounded-xl bg-zinc-900/80 flex items-center justify-center overflow-hidden mb-4">
-            <span class="absolute top-3 left-3 bg-black/60 border border-zinc-800 px-2.5 py-1 rounded-md font-mono text-[10px] text-brand-accent uppercase">EXCLUSIVE</span>
-            <i class="fa-solid fa-gem text-7xl text-zinc-800 group-hover:scale-110 group-hover:text-brand-accent transition duration-500"></i>
-          </div>
-          <div class="flex justify-between items-start mb-2">
-            <div>
-              <p class="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">TRAVIS SCOTT x NIKE</p>
-              <h3 class="font-display text-lg font-bold group-hover:text-brand-accent transition">Reverse Mocha Low OG</h3>
-            </div>
-            <span class="font-mono text-sm font-bold text-white">$1,100</span>
-          </div>
-          <button class="w-full mt-2 py-2.5 glass-button rounded-lg font-mono text-xs uppercase tracking-wider font-bold text-zinc-300 group-hover:bg-brand-accent group-hover:text-white transition">
-            QUICK ADD
-          </button>
-        </div>
+        </article>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-zinc-800/80 py-8 px-6 text-center font-mono text-xs text-zinc-500">
-      <p>© 2026 TOP BOYS KICKS (TOPBOYSKICKS.COM). ALL RIGHTS RESERVED.</p>
-    </footer>
+    <section class="screen social" id="connect" aria-labelledby="connect-title">
+      <div class="screen-inner">
+        <div>
+          <p class="eyebrow section-tag">Stay connected</p>
+          <h2 id="connect-title">Find us out there.</h2>
+          <p class="copy">Got a question, spotted a pair, or want to keep up with the latest drops? Choose where you want to go next.</p>
+          <p class="social-note">Tip: make WhatsApp the clearest path to buying if customers usually ask about sizes, prices, and availability before ordering.</p>
+        </div>
+        <nav class="link-list" aria-label="Top Boys Kicks social and contact links">
+          <!-- IMPORTANT: Replace these example destinations with the brand's real accounts. -->
+          <a class="link-item" href="https://wa.me/2347018607320" target="_blank" rel="noopener noreferrer">
+            <span class="link-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.3A8.4 8.4 0 1 1 21 11.5Z"/><path d="M8.5 8.5c.6 2.5 2.5 4.4 5 5"/></svg></span>
+            <span class="link-copy"><strong>WhatsApp</strong><small>Ask about sizes, prices and availability</small></span>
+            <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </a>
+          <a class="link-item" href="https://www.instagram.com/topboyskicks/" target="_blank" rel="noopener noreferrer">
+            <span class="link-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></span>
+            <span class="link-copy"><strong>Instagram</strong><small>New drops, fits and brand updates</small></span>
+            <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </a>
+          <a class="link-item" href="https://www.topboyskicks.com/" target="_blank" rel="noopener noreferrer">
+            <span class="link-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
+            <span class="link-copy"><strong>Shop the website</strong><small>Browse the full collection</small></span>
+            <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </a>
+          <a class="link-item" href="mailto:Topboykicks@yahoo.com">
+            <span class="link-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <span class="link-copy"><strong>Email</strong><small>For business and other enquiries</small></span>
+            <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </a>
+        </nav>
+      </div>
+      <footer class="footer"><span><strong>TOP BOYS KICKS</strong> · Your adventure starts here.</span><a href="#home">Back to top ↑</a></footer>
+    </section>
   </main>
 
-  <!-- JAVASCRIPT STATE MANAGEMENT & AUDIO SYNTHESIS -->
   <script>
-    // State Variables
-    let progress = 0;
-    let duration = 3500; // Default 3.5s
-    let intervalId = null;
-    let audioEnabled = false;
-    let audioCtx = null;
-    
-    // Rotating Quotes
-    const statusQuotes = [
-      "AUTHENTICATING HEAT...",
-      "UNBOXING FRESH DROPS...",
-      "CHECKING SOLES & STITCHES...",
-      "SECURING THE HYPE...",
-      "VERIFYING DEADSTOCK STATUS...",
-      "READY TO STEP UP"
-    ];
+    (() => {
+      const loader = document.getElementById('loader');
+      const header = document.getElementById('siteHeader');
+      const nav = document.getElementById('sectionNav');
+      const dots = [...nav.querySelectorAll('button')];
+      const progress = document.getElementById('progress');
+      const sections = [...document.querySelectorAll('.screen')];
+      const menu = document.getElementById('mobileMenu');
+      const openBtn = document.getElementById('menuOpen');
+      const closeBtn = document.getElementById('menuClose');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let loaderHidden = false;
 
-    // Web Audio API Synthesizer (No external audio dependencies)
-    function initAudio() {
-      if (!audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContext();
+      function hideLoader() {
+        if (loaderHidden) return;
+        loaderHidden = true;
+        loader.classList.add('hidden');
+        document.body.classList.remove('is-loading');
       }
-    }
+      window.addEventListener('load', () => window.setTimeout(hideLoader, 500), { once: true });
+      window.setTimeout(hideLoader, 1600);
 
-    function playSound(type) {
-      if (!audioEnabled || !audioCtx) return;
-      try {
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        const now = audioCtx.currentTime;
-
-        if (type === 'tick') {
-          // Subtle high frequency UI tick
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(800, now);
-          osc.frequency.exponentialRampToValueAtTime(400, now + 0.03);
-          gain.gain.setValueAtTime(0.02, now);
-          gain.gain.linearRampToValueAtTime(0, now + 0.03);
-          osc.start(now);
-          osc.stop(now + 0.03);
-        } else if (type === 'complete') {
-          // Futuristic triumph chime
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.3);
-          gain.gain.setValueAtTime(0.1, now);
-          gain.gain.linearRampToValueAtTime(0, now + 0.3);
-          osc.start(now);
-          osc.stop(now + 0.3);
-        } else if (type === 'squeak') {
-          // Playful sneaker squeak sound synthesis
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(1200, now);
-          osc.frequency.linearRampToValueAtTime(2400, now + 0.08);
-          osc.frequency.linearRampToValueAtTime(1800, now + 0.15);
-          gain.gain.setValueAtTime(0.04, now);
-          gain.gain.linearRampToValueAtTime(0, now + 0.15);
-          osc.start(now);
-          osc.stop(now + 0.15);
-        }
-      } catch(e) {
-        console.warn("Audio synthesis error:", e);
+      function goTo(id) {
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        closeMenu();
       }
-    }
+      dots.forEach(dot => dot.addEventListener('click', () => goTo(dot.dataset.target)));
 
-    function toggleAudio() {
-      audioEnabled = !audioEnabled;
-      const icon = document.getElementById('audioIcon');
-      const text = document.getElementById('audioText');
-      
-      if (audioEnabled) {
-        initAudio();
-        icon.className = 'fa-solid fa-volume-high text-brand-neon';
-        text.innerText = 'SOUND: ON';
-        playSound('squeak');
-      } else {
-        icon.className = 'fa-solid fa-volume-xmark text-zinc-400';
-        text.innerText = 'SOUND: OFF';
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          dots.forEach(dot => dot.classList.toggle('active', dot.dataset.target === id));
+          const light = id === 'featured' || id === 'connect';
+          header.classList.toggle('light-header', light);
+          nav.classList.toggle('dark-dots', light);
+          header.classList.toggle('scrolled', id !== 'home');
+        });
+      }, { threshold: 0.55 });
+      sections.forEach(section => observer.observe(section));
+
+      function updateProgress() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = pct + '%';
       }
-    }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+      updateProgress();
 
-    // Loader Core Logic
-    const progressCircle = document.getElementById('progressCircle');
-    const loaderPercent = document.getElementById('loaderPercent');
-    const statusQuote = document.getElementById('statusQuote');
-    const sneakerPaths = document.querySelectorAll('.sneaker-path');
-    const enterBtn = document.getElementById('enterBtn');
-    const bottomTagline = document.getElementById('bottomTagline');
-
-    const circleCircumference = 2 * Math.PI * 44; // r=44 => ~276.46
-
-    function updateProgress(val) {
-      progress = Math.min(Math.max(val, 0), 100);
-      
-      // Update SVG Circle
-      const offset = circleCircumference - (progress / 100) * circleCircumference;
-      progressCircle.style.strokeDashoffset = offset;
-      
-      // Update Text Percentage
-      loaderPercent.innerText = `${Math.floor(progress)}%`;
-
-      // Update Sneaker SVG Line Tracing
-      sneakerPaths.forEach(path => {
-        const totalLen = 1200;
-        const drawLen = totalLen - (progress / 100) * totalLen;
-        path.style.strokeDashoffset = drawLen;
+      function openMenu() {
+        menu.classList.add('open');
+        menu.setAttribute('aria-hidden', 'false');
+        openBtn.setAttribute('aria-expanded', 'true');
+        closeBtn.focus();
+      }
+      function closeMenu() {
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        openBtn.setAttribute('aria-expanded', 'false');
+      }
+      openBtn.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        const id = link.getAttribute('href').slice(1);
+        goTo(id);
+        openBtn.focus();
+      }));
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMenu();
       });
-
-      // Update Dynamic Quotes based on progress phase
-      const quoteIndex = Math.min(
-        Math.floor((progress / 100) * statusQuotes.length),
-        statusQuotes.length - 1
-      );
-      if (statusQuote.innerText !== statusQuotes[quoteIndex]) {
-        statusQuote.style.opacity = '0';
-        setTimeout(() => {
-          statusQuote.innerText = statusQuotes[quoteIndex];
-          statusQuote.style.opacity = '1';
-        }, 150);
-        playSound('tick');
-      }
-
-      // Check Completion
-      if (progress >= 100) {
-        onLoaderComplete();
-      }
-    }
-
-    function startLoading() {
-      if (intervalId) clearInterval(intervalId);
-      
-      let startTime = Date.now();
-      let initialProgress = progress;
-
-      if (duration === Infinity) {
-        // Infinite slow loop bounce
-        intervalId = setInterval(() => {
-          progress = (progress + 0.5) % 99;
-          updateProgress(progress);
-        }, 100);
-        return;
-      }
-
-      intervalId = setInterval(() => {
-        let elapsed = Date.now() - startTime;
-        let p = initialProgress + (elapsed / duration) * (100 - initialProgress);
-        
-        if (p >= 100) {
-          p = 100;
-          clearInterval(intervalId);
-        }
-        updateProgress(p);
-      }, 30);
-    }
-
-    function onLoaderComplete() {
-      playSound('complete');
-      
-      // Reveal the "ENTER THE VAULT" button
-      enterBtn.disabled = false;
-      enterBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-      enterBtn.classList.add('opacity-100', 'translate-y-0');
-      
-      // Glow and pulse enter button
-      enterBtn.classList.add('animate-bounce');
-      setTimeout(() => enterBtn.classList.remove('animate-bounce'), 1500);
-
-      bottomTagline.style.opacity = '0.4';
-    }
-
-    // Demo Speed Controls
-    function setSpeed(ms, label) {
-      duration = ms;
-      restartLoader();
-    }
-
-    function restartLoader() {
-      progress = 0;
-      enterBtn.disabled = true;
-      enterBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-      enterBtn.classList.remove('opacity-100', 'translate-y-0');
-      bottomTagline.style.opacity = '1';
-      startLoading();
-    }
-
-    function instantFinish() {
-      if (intervalId) clearInterval(intervalId);
-      updateProgress(100);
-    }
-
-    function toggleControlPanel() {
-      const panel = document.getElementById('controlPanel');
-      panel.classList.toggle('translate-y-full');
-      playSound('squeak');
-    }
-
-    // Transition to Main Site
-    function revealSite() {
-      playSound('squeak');
-      const preloader = document.getElementById('preloader');
-      const mainSite = document.getElementById('mainSite');
-      
-      // Curtain Reveal Curtain Effect
-      preloader.style.transform = 'translateY(-100%)';
-      
-      setTimeout(() => {
-        mainSite.classList.remove('opacity-0');
-        mainSite.classList.add('opacity-100');
-        document.body.style.overflowY = 'auto';
-      }, 400);
-    }
-
-    // BACKGROUND PARTICLES CANVAS
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.4;
-        this.speedY = (Math.random() - 0.5) * 0.4;
-        this.alpha = Math.random() * 0.6 + 0.1;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-          this.reset();
-        }
-      }
-      draw() {
-        ctx.fillStyle = `rgba(204, 255, 0, ${this.alpha})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function initParticles() {
-      particles = [];
-      const particleCount = Math.floor(window.innerWidth / 20);
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-
-    // Initialization on window load
-    window.onload = function() {
-      initParticles();
-      animateParticles();
-      startLoading();
-    };
+    })();
   </script>
 </body>
 </html>
